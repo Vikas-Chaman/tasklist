@@ -74,7 +74,7 @@ body {
     flex: 0 0 350px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
 }
 
 .right-panel {
@@ -91,7 +91,6 @@ body {
     background-color: #e1f5fe;
     padding: 10px;
     border-radius: 8px;
-    margin-bottom: 0;
 }
 .stat-item {
     text-align: center;
@@ -110,12 +109,22 @@ body {
 }
 #resultPoints { color: #00796b; }
 
+.chart-container {
+    background-color: #f0f9ff;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #b3e5fc;
+}
+#taskStatusChart {
+    max-height: 200px;
+    width: 100% !important;
+}
+
 
 .controls-area {
     background-color: #f0f9ff;
     padding: 15px;
     border-radius: 8px;
-    margin-bottom: 0;
     border: 1px solid #b3e5fc;
     display: flex;
     flex-direction: column;
@@ -143,7 +152,6 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    flex-wrap: wrap;
 }
 .date-filter label { font-weight: bold; flex-shrink: 0; }
 .date-filter input[type="date"]{
@@ -174,11 +182,11 @@ body {
 .file-operations label.file-btn:hover {
     background-color: #0277bd;
 }
-.archive-btn {
-    background-color: #ff9800 !important;
+button#archiveDayBtn.control-btn.archive-btn {
+    background-color: #ff9800;
 }
-.archive-btn:hover {
-    background-color: #f57c00 !important;
+button#archiveDayBtn.control-btn.archive-btn:hover {
+    background-color: #f57c00;
 }
 
 
@@ -194,7 +202,6 @@ body {
     grid-template-columns: auto 1fr;
     gap: 10px;
     align-items: center;
-    margin-bottom: 0;
     background-color: #f0f9ff;
     padding: 15px;
     border-radius: 8px;
@@ -247,27 +254,24 @@ body {
     margin-bottom: 10px;
     border-radius: 5px;
     display: flex;
-    flex-direction: column; /* Changed for edit form */
+    flex-direction: column;
     justify-content: space-between;
     transition: background-color 0.3s ease, opacity 0.3s ease, border-color 0.3s ease;
 }
 .task-item.completed {
-    background-color: #c5e1a5;
-    opacity: 0.7;
-    border-color: #a5d6a7;
+    background-color: #cfe8fc;
+    opacity: 0.85;
+    border-color: #a9d5f7;
 }
+
 .task-item.completed .task-text { text-decoration: line-through; color: #555; }
 
-/* Removed .needs-follow-up */
 
 .task-item.overdue:not(.completed) {
     border-left: 5px solid #ef5350;
 }
-.task-item.overdue:not(.completed) .task-text {
-    /* color: #c62828; */
-}
 
-/* Styles for in-place edit form */
+
 .task-item-edit-form {
     display: flex;
     flex-direction: column;
@@ -296,7 +300,7 @@ body {
 }
 
 
-.task-item-content-wrapper { /* New wrapper for normal display */
+.task-item-content-wrapper {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -354,7 +358,7 @@ body {
     margin-bottom: 3px;
 }
 .task-item.completed .task-due-time {
-    color: #558b2f;
+    color: #01579b;
     text-decoration: line-through;
 }
 
@@ -391,7 +395,7 @@ body {
 .task-actions button:hover { background-color: #29b6f6; }
 .task-actions button.delete-btn { background-color: #ef5350; }
 .task-actions button.delete-btn:hover { background-color: #e53935; }
-.task-actions button.edit-btn { background-color: #ffb74d; } /* Orange for edit */
+.task-actions button.edit-btn { background-color: #ffb74d; }
 .task-actions button.edit-btn:hover { background-color: #ffa726; }
 
 

@@ -6,13 +6,16 @@
     <title>Advanced Blue Task Tracker</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
 
         <div class="top-info-bar">
             <div class="stat-item" id="scoreCardContainer">
-                <h3>Score Card</h3>
+                <h3>Score Card 📊</h3>
                 <p id="scoreCard">0 / 0 Pts</p>
             </div>
             <div class="motivation-area">
@@ -24,51 +27,52 @@
             <div class="left-panel">
                 <div class="controls-area">
                     <div class="search-area">
-                        <input type="text" id="searchInput" placeholder="Search tasks...">
+                        <input type="text" id="searchInput" placeholder="🔍 Search tasks...">
                     </div>
                     <div class="date-filter">
-                        <label for="dateFilter">Show tasks for:</label>
+                        <label for="dateFilter">🗓️ Show tasks for:</label>
                         <input type="date" id="dateFilter">
-                        <button id="showAllTasksBtn" class="control-btn">Show All</button>
-                        <button id="archiveDayBtn" class="control-btn archive-btn" style="display: none;">Archive Day</button>
                     </div>
                     <div class="file-operations">
-                        <label for="excelImport" class="file-btn control-btn">Import from Excel</label>
+                        <button id="showAllTasksBtn" class="control-btn" title="Show All Tasks">🔄 Show All</button>
+                        <label for="excelImport" class="file-btn control-btn" title="Import from Excel">📥 I_EXCEL</label>
                         <input type="file" id="excelImport" accept=".xlsx, .xls" style="display: none;">
-                        <button id="saveLogBtn" class="control-btn">Save Log</button>
-                        <label for="importLog" class="file-btn control-btn">Import Log</label>
+                        <button id="downloadTemplateBtn" class="control-btn" title="Download Excel Template">📄 E_EXCEL</button>
+                        <button id="saveLogBtn" class="control-btn" title="Save Log to JSON">💾 Save Log</button>
+                        <label for="importLog" class="file-btn control-btn" title="Import Log from JSON">⤴️ Import Log</label>
                         <input type="file" id="importLog" accept=".json" style="display: none;">
-                        <button id="downloadTemplateBtn" class="control-btn">Download Excel Template</button>
-                        <label for="importArchivedDay" class="file-btn control-btn">Import Archived Day</label>
+                        <button id="archiveDayBtn" class="control-btn archive-btn" title="Archive Selected Day's Tasks" style="display: none;">📦 A_DAY</button>
+                        <label for="importArchivedDay" class="file-btn control-btn" title="Import Archived Day from JSON">📚 I_A_D</label>
                         <input type="file" id="importArchivedDay" accept=".json" style="display: none;">
+                        <button id="generateReportBtn" class="control-btn" title="Generate PDF Report for Today">📊 PDF Report</button>
                     </div>
                 </div>
-
+                <div class="chart-container">
+                    <canvas id="taskStatusChart"></canvas>
+                </div>
                 <div class="input-area">
-                    <input type="text" id="taskText" placeholder="Enter task description...">
-                    <input type="number" id="taskPoints" placeholder="Points" min="1" value="1">
-                    <input type="text" id="assignTo" placeholder="Assign to (optional)">
-                    <!-- Follow-up Date Removed -->
-                    <label for="taskForDate" class="input-label">Task for Date:</label>
+                    <input type="text" id="taskText" placeholder="➕ Enter task description...">
+                    <input type="number" id="taskPoints" placeholder="🎯 Points" min="1" value="1">
+                    <input type="text" id="assignTo" placeholder="👤 Assign to (optional)">
+                    <label for="taskForDate" class="input-label">🗓️ Task for Date:</label>
                     <input type="date" id="taskForDate">
-                    <label for="taskDueTime" class="input-label">Due Time:</label>
+                    <label for="taskDueTime" class="input-label">⏰ Due Time:</label>
                     <input type="time" id="taskDueTime" value="17:00">
-                    <button id="addTaskBtn">Add Task</button>
+                    <button id="addTaskBtn">➕ Add Task</button>
                 </div>
             </div>
 
             <div class="right-panel">
                 <div class="stats-area">
                     <div class="stat-item">
-                        <h3>Pending Tasks</h3>
+                        <h3>⏳ Pending Tasks</h3>
                         <p id="pendingTasksCount">0</p>
                     </div>
                     <div class="stat-item">
-                        <h3>Completed Points</h3>
+                        <h3>✅ Completed Points</h3>
                         <p id="resultPoints">0</p>
                     </div>
                 </div>
-
                 <ul id="taskList">
                     <!-- Tasks will be dynamically added here -->
                 </ul>
@@ -76,6 +80,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
